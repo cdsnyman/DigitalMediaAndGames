@@ -54,10 +54,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2933830CC4D8610DECCABA528A1EB14680ADF9FD</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>4DD2171EB3935AD85DD16517E78254016F6404C9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ShootShapesUp_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>ShootShapesUp_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -92,6 +92,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ShootShapesUp_1_TemporaryKey.pfx" />
     <None Include="ShootShapesUp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

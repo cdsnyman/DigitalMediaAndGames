@@ -74,5 +74,10 @@ namespace ShootShapesUp
         {
             return WasButtonPressed(Buttons.LeftTrigger) || WasButtonPressed(Buttons.RightTrigger) || WasKeyPressed(Keys.Space);
         }
+
+        public static bool WasShootButtonPressed()
+        {
+            return mouseState.LeftButton == ButtonState.Pressed;
+        }
     }
 }
