@@ -15,7 +15,7 @@ namespace ShootShapesUp
         private List<IEnumerator<int>> behaviours = new List<IEnumerator<int>>();
         private int timeUntilStart = 60;
         public bool IsActive { get { return timeUntilStart <= 0; } }
-        public int PointValue { get; private set; }
+        public int HealthPoints = 1;
 
         public Enemy(Texture2D image, Vector2 position)
         {
@@ -23,14 +23,22 @@ namespace ShootShapesUp
             Position = position;
             Radius = image.Width / 2f;
             color = Color.Transparent;
-            PointValue = 1;
         }
 
-        public static Enemy CreateSeeker(Vector2 position)
+        public static Enemy CreateGovernmentSeeker(Vector2 position)
         {
             var enemy = new Enemy(GameRoot.Seeker, position);
-            enemy.AddBehaviour(enemy.FollowPlayer());
-            enemy.PointValue = 2;
+            enemy.AddBehaviour(enemy.FollowPlayer(1f));
+            enemy.HealthPoints = 10;
+
+            return enemy;
+        }
+
+        public static Enemy CreatePirateSeeker(Vector2 position)
+        {
+            var enemy = new Enemy(GameRoot.Seeker, position);
+            enemy.AddBehaviour(enemy.FollowPlayer(1.2f));
+            enemy.HealthPoints = 1;
 
             return enemy;
         }
@@ -73,8 +81,12 @@ namespace ShootShapesUp
 
         public void WasShot()
         {
-            IsExpired = true;
-            GameRoot.Explosion.Play(0.5f, rand.NextFloat(-0.2f, 0.2f), 0);
+            --HealthPoints;
+            if (HealthPoints == 0)
+            {
+                IsExpired = true;
+                GameRoot.Explosion.Play(0.5f, rand.NextFloat(-0.2f, 0.2f), 0);
+            }
 
         }
 

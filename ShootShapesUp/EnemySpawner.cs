@@ -10,19 +10,24 @@ namespace ShootShapesUp
     static class EnemySpawner
     {
         static Random rand = new Random();
-        static float inverseSpawnChance = 60;
+        static float governmentSeekerSpawnChance = 60;
+        static float pirateSeekerSpawnChance = 60;
 
         public static void Update()
         {
             if (!PlayerShip.Instance.IsDead && EntityManager.Count < 200)
             {
-                if (rand.Next((int)inverseSpawnChance) == 0)
-                    EntityManager.Add(Enemy.CreateSeeker(GetSpawnPosition()));
+                if (rand.Next((int)governmentSeekerSpawnChance) == 0)
+                    EntityManager.Add(Enemy.CreateGovernmentSeeker(GetSpawnPosition()));
+                if (rand.Next((int)pirateSeekerSpawnChance) == 0)
+                    EntityManager.Add(Enemy.CreatePirateSeeker(GetSpawnPosition()));
             }
 
             // slowly increase the spawn rate as time progresses
-            if (inverseSpawnChance > 20)
-                inverseSpawnChance -= 0.005f;
+            if (governmentSeekerSpawnChance > 20)
+                governmentSeekerSpawnChance -= 0.005f;
+            if (pirateSeekerSpawnChance > 20)
+                pirateSeekerSpawnChance -= 0.005f;
         }
 
         private static Vector2 GetSpawnPosition()
