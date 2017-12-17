@@ -44,7 +44,8 @@ namespace ShootShapesUp
 
         public static void Reset()
         {
-            inverseSpawnChance = 60;
+            governmentSeekerSpawnChance = 60;
+            pirateSeekerSpawnChance = 60;
         }
     }
 }
