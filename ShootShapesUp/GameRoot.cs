@@ -46,8 +46,8 @@ namespace ShootShapesUp
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = @"Content";
 
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 1366;
+            graphics.PreferredBackBufferHeight = 786;
         }
 
         protected override void Initialize()
@@ -56,8 +56,8 @@ namespace ShootShapesUp
 
             EntityManager.Add(PlayerShip.Instance);
 
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(GameRoot.Music);
+            //MediaPlayer.IsRepeating = true; //TODO: UNCOMMENT WHEN COMPLETED, MUSIC IS LOUD
+            //MediaPlayer.Play(GameRoot.Music);
         }
 
         protected override void LoadContent()
