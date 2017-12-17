@@ -56,6 +56,8 @@ namespace ShootShapesUp
 
             EntityManager.Add(PlayerShip.Instance);
 
+            this.IsMouseVisible = true;
+
             //MediaPlayer.IsRepeating = true; //TODO: UNCOMMENT WHEN COMPLETED, MUSIC IS LOUD
             //MediaPlayer.Play(GameRoot.Music);
         }

@@ -76,8 +76,7 @@ namespace ShootShapesUp
             Position += Velocity;
             Position = Vector2.Clamp(Position, Size / 2, GameRoot.ScreenSize - Size / 2);
 
-            if (Velocity.LengthSquared() > 0)
-                Orientation = Velocity.ToAngle();
+            Orientation = Input.GetAimDirection().ToAngle();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
