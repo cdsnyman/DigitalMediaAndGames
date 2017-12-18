@@ -93,6 +93,11 @@ namespace ShootShapesUp
             }
         }
 
+        public static void DespawnAllEnemies()
+        {
+            enemies.ForEach(x => x.WasCrashedInto());
+        }
+
         private static bool IsColliding(Entity a, Entity b)
         {
             float radius = a.Radius + b.Radius;

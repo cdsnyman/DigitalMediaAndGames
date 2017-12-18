@@ -20,5 +20,6 @@ namespace ShootShapesUp
         public static int CurrentLevel = 1;
         public static int TotalEnemiesSpawnedInLevel = 0;
         public static bool BossStatus = false;
+        public static bool BossKilled = false;
     }
 }

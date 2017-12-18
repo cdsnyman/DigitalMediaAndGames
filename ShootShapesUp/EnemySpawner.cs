@@ -62,12 +62,17 @@ namespace ShootShapesUp
                         break;
 
                     case 3://Level 3
-                        GameSessionStats.NumberOfKillsRequired = 40;
 
-                        if (GameSessionStats.BossStatus == false)
+                        if (GameSessionStats.BossStatus == false) //Ensure only one boss is spawned
                         {
                             EntityManager.Add(Enemy.CreateGovernmentBoss(GetSpawnPosition()));
                             GameSessionStats.BossStatus = true;
+                        }
+
+                        if(GameSessionStats.BossKilled == true)
+                        {
+                            GameRoot.ResetGameSession();
+                            GameSessionStats.CurrentLevel = 1;
                         }
 
                         if (rand.Next((int)governmentSeekerSpawnChance * 2) == 0)
