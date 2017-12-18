@@ -25,7 +25,7 @@ namespace ShootShapesUp
         const int cooldownFrames = 6;
         int cooldownRemaining = 0;
         public bool invincibility = false;
-        int invincibilityTimer = 30;
+        int invincibilityTimer = 40;
 
         int framesUntilRespawn = 0;
         public bool IsDead { get { return framesUntilRespawn > 0; } }
@@ -102,7 +102,7 @@ namespace ShootShapesUp
             --GameSessionStats.NumberOfLives;
             framesUntilRespawn = 60;
             invincibility = true;
-            invincibilityTimer = 30;
+            invincibilityTimer = 40;
         }
     }
 }

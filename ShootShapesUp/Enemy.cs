@@ -122,6 +122,13 @@ namespace ShootShapesUp
 
         }
 
+        public void Despawn()
+        {
+                IsExpired = true;
+                GameRoot.Explosion.Play(0.5f, rand.NextFloat(-0.2f, 0.2f), 0);
+                --GameSessionStats.TotalEnemiesSpawnedInLevel; //Ensure player death does not count all despawned enemies as a spawn without a kill
+        }
+
         #region Behaviours
         IEnumerable<int> FollowPlayer(float acceleration = 1f)
         {

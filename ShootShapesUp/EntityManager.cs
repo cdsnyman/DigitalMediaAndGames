@@ -95,7 +95,7 @@ namespace ShootShapesUp
 
         public static void DespawnAllEnemies()
         {
-            enemies.ForEach(x => x.WasCrashedInto());
+            enemies.ForEach(x => x.Despawn());
         }
 
         private static bool IsColliding(Entity a, Entity b)
