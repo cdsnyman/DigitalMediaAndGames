@@ -63,8 +63,9 @@ namespace ShootShapesUp
             GameSessionStats.StopWatch.Start();
 
             SoundEffect.MasterVolume = 0.2f;
-            //MediaPlayer.IsRepeating = true; //TODO: UNCOMMENT WHEN COMPLETED, MUSIC IS LOUD
-            //MediaPlayer.Play(GameRoot.Music);
+            MediaPlayer.IsRepeating = true; //TODO: UNCOMMENT WHEN COMPLETED, MUSIC IS LOUD
+            MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Play(GameRoot.Music);
         }
 
         protected override void LoadContent()
