@@ -16,12 +16,14 @@ namespace ShootShapesUp
         public static Vector2 ScreenSize { get { return new Vector2(Viewport.Width, Viewport.Height); } }
         public static GameTime GameTime { get; private set; }
 
+        public static Texture2D Background { get; private set; }
         public static Texture2D Player { get; private set; }
         public static Texture2D GovernmentSeeker { get; private set; }
         public static Texture2D PirateSeeker { get; private set; }
         public static Texture2D PirateBoss { get; private set; }
         public static Texture2D Bullet { get; private set; }
         public static Texture2D Pointer { get; private set; }
+
 
         public static SpriteFont Font { get; private set; }
 
@@ -71,6 +73,8 @@ namespace ShootShapesUp
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Background = Content.Load<Texture2D>("Art/New/background");
             Player = Content.Load<Texture2D>("Art/New/PlayerShip");
             GovernmentSeeker = Content.Load<Texture2D>("Art/New/GovernmentSeeker");
             PirateBoss = Content.Load<Texture2D>("Art/New/PirateBoss"); //TODO: Change Filepath from placeholders when new assets added
@@ -78,7 +82,8 @@ namespace ShootShapesUp
             Bullet = Content.Load<Texture2D>("Art/Bullet");
             Pointer = Content.Load<Texture2D>("Art/Pointer");
 
-            Font = Content.Load<SpriteFont>("Font");
+
+            Font = Content.Load<SpriteFont>("FinalFont");
 
             Music = Content.Load<Song>("Sound/Music");
 
@@ -112,7 +117,8 @@ namespace ShootShapesUp
             GraphicsDevice.Clear(Color.Black);
 
             // Draw entities. Sort by texture for better batching.
-            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.NonPremultiplied);
+            spriteBatch.Draw(GameRoot.Background, Vector2.Zero, Color.White);
             EntityManager.Draw(spriteBatch);
             spriteBatch.End();
 
