@@ -19,7 +19,7 @@ namespace ShootShapesUp
         public static Texture2D Player { get; private set; }
         public static Texture2D GovernmentSeeker { get; private set; }
         public static Texture2D PirateSeeker { get; private set; }
-        public static Texture2D GovernmentBoss { get; private set; }
+        public static Texture2D PirateBoss { get; private set; }
         public static Texture2D Bullet { get; private set; }
         public static Texture2D Pointer { get; private set; }
 
@@ -70,10 +70,10 @@ namespace ShootShapesUp
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Player = Content.Load<Texture2D>("Art/Player");
-            GovernmentSeeker = Content.Load<Texture2D>("Art/Seeker");
-            GovernmentBoss = Content.Load<Texture2D>("Art/Seeker"); //TODO: Change Filepath from placeholders when new assets added
-            PirateSeeker = Content.Load<Texture2D>("Art/Seeker");
+            Player = Content.Load<Texture2D>("Art/New/PlayerShip");
+            GovernmentSeeker = Content.Load<Texture2D>("Art/New/GovernmentSeeker");
+            PirateBoss = Content.Load<Texture2D>("Art/New/PirateBoss"); //TODO: Change Filepath from placeholders when new assets added
+            PirateSeeker = Content.Load<Texture2D>("Art/New/PirateSeeker");
             Bullet = Content.Load<Texture2D>("Art/Bullet");
             Pointer = Content.Load<Texture2D>("Art/Pointer");
 

@@ -40,7 +40,7 @@ namespace ShootShapesUp
 
         internal static Entity CreateGovernmentBoss(Vector2 position)
         {
-            var enemy = new Enemy(GameRoot.GovernmentBoss, position);
+            var enemy = new Enemy(GameRoot.PirateBoss, position);
             enemy.AddBehaviour(enemy.FollowPlayer(1f));
             enemy.HealthPoints = 100;
             enemy.BossFlag = true;
