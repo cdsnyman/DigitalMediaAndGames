@@ -37,7 +37,7 @@ namespace ShootShapesUp
         private static SoundEffect[] spawns;
         public static SoundEffect Spawn { get { return spawns[rand.Next(spawns.Length)]; } }
 
-        GraphicsDeviceManager graphics;
+        protected static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public GameRoot()
@@ -58,6 +58,9 @@ namespace ShootShapesUp
 
             this.IsMouseVisible = true;
 
+            GameSessionStats.StopWatch.Start();
+
+            SoundEffect.MasterVolume = 0.2f;
             //MediaPlayer.IsRepeating = true; //TODO: UNCOMMENT WHEN COMPLETED, MUSIC IS LOUD
             //MediaPlayer.Play(GameRoot.Music);
         }
@@ -106,7 +109,7 @@ namespace ShootShapesUp
 
             // Draw user interface
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
-
+            HeadsUpDisplay.Draw(spriteBatch);
             spriteBatch.End();
 
 
@@ -117,6 +120,13 @@ namespace ShootShapesUp
         {
             var textWidth = GameRoot.Font.MeasureString(text).X;
             spriteBatch.DrawString(GameRoot.Font, text, new Vector2(ScreenSize.X - textWidth - 5, y), Color.White);
+        }
+
+        public static void ResetGameSession()
+        {
+            GameSessionStats.NumberOfKills = 0;
+            GameSessionStats.NumberOfLives = 3;
+            GameSessionStats.StopWatch.Restart();
         }
     }
 }

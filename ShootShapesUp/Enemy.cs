@@ -86,6 +86,7 @@ namespace ShootShapesUp
             {
                 IsExpired = true;
                 GameRoot.Explosion.Play(0.5f, rand.NextFloat(-0.2f, 0.2f), 0);
+                GameSessionStats.NumberOfKills++;
             }
 
         }
