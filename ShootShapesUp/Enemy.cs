@@ -16,10 +16,14 @@ namespace ShootShapesUp
         private int timeUntilStart = 60;
         public bool IsActive { get { return timeUntilStart <= 0; } }
         public int HealthPoints = 1;
+        public bool BossFlag = false;
+
+        public static Enemy instance;
 
         public Enemy(Texture2D image, Vector2 position)
         {
             this.image = image;
+            instance = this;
             Position = position;
             Radius = image.Width / 2f;
             color = Color.Transparent;
@@ -27,16 +31,26 @@ namespace ShootShapesUp
 
         public static Enemy CreateGovernmentSeeker(Vector2 position)
         {
-            var enemy = new Enemy(GameRoot.Seeker, position);
+            var enemy = new Enemy(GameRoot.GovernmentSeeker, position);
             enemy.AddBehaviour(enemy.FollowPlayer(1f));
             enemy.HealthPoints = 10;
 
             return enemy;
         }
 
+        internal static Entity CreateGovernmentBoss(Vector2 position)
+        {
+            var enemy = new Enemy(GameRoot.GovernmentBoss, position);
+            enemy.AddBehaviour(enemy.FollowPlayer(1f));
+            enemy.HealthPoints = 100;
+            enemy.BossFlag = true;
+
+            return enemy;
+        }
+
         public static Enemy CreatePirateSeeker(Vector2 position)
         {
-            var enemy = new Enemy(GameRoot.Seeker, position);
+            var enemy = new Enemy(GameRoot.PirateSeeker, position);
             enemy.AddBehaviour(enemy.FollowPlayer(1.2f));
             enemy.HealthPoints = 1;
 
@@ -58,6 +72,8 @@ namespace ShootShapesUp
 
             Velocity *= 0.8f;
         }
+
+        
 
         private void AddBehaviour(IEnumerable<int> behaviour)
         {
@@ -87,6 +103,17 @@ namespace ShootShapesUp
                 IsExpired = true;
                 GameRoot.Explosion.Play(0.5f, rand.NextFloat(-0.2f, 0.2f), 0);
                 GameSessionStats.NumberOfKills++;
+            }
+
+        }
+
+        public void WasCrashedInto()
+        {
+            if (BossFlag == false)
+            {
+                IsExpired = true;
+                GameRoot.Explosion.Play(0.5f, rand.NextFloat(-0.2f, 0.2f), 0);
+                --GameSessionStats.TotalEnemiesSpawnedInLevel; //Ensure player death does not count all despawned enemies as a spawn without a kill
             }
 
         }

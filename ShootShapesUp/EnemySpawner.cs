@@ -10,24 +10,106 @@ namespace ShootShapesUp
     static class EnemySpawner
     {
         static Random rand = new Random();
-        static float governmentSeekerSpawnChance = 60;
+        //Default spawn values
+        static float governmentSeekerSpawnChance = 60; 
         static float pirateSeekerSpawnChance = 60;
 
         public static void Update()
         {
             if (!PlayerShip.Instance.IsDead && EntityManager.Count < 200)
             {
-                if (rand.Next((int)governmentSeekerSpawnChance) == 0)
-                    EntityManager.Add(Enemy.CreateGovernmentSeeker(GetSpawnPosition()));
-                if (rand.Next((int)pirateSeekerSpawnChance) == 0)
-                    EntityManager.Add(Enemy.CreatePirateSeeker(GetSpawnPosition()));
+                switch (GameSessionStats.CurrentLevel)
+                {
+                    case 1: //Level 1
+                        GameSessionStats.NumberOfKillsRequired = 20;
+
+                        if (ProgressToNextLevel())
+                            break;
+
+                        if (LevelSpawnCapReached())
+                            break;
+                        
+                        if (rand.Next((int)governmentSeekerSpawnChance) == 0)
+                        {
+                            EntityManager.Add(Enemy.CreateGovernmentSeeker(GetSpawnPosition()));
+                            ++GameSessionStats.TotalEnemiesSpawnedInLevel;
+                        }
+                            
+                        break;
+
+                    case 2://Level 2
+                        GameSessionStats.NumberOfKillsRequired = 30;
+
+                        if (ProgressToNextLevel())
+                            break;
+
+                        if (LevelSpawnCapReached())
+                            break;
+
+                        if (rand.Next((int)governmentSeekerSpawnChance * 2) == 0)
+                        {
+                            EntityManager.Add(Enemy.CreateGovernmentSeeker(GetSpawnPosition()));
+                            ++GameSessionStats.TotalEnemiesSpawnedInLevel;
+                        }
+                            
+                        if (rand.Next((int)pirateSeekerSpawnChance * 2) == 0)
+                        {
+                            EntityManager.Add(Enemy.CreatePirateSeeker(GetSpawnPosition()));
+                            ++GameSessionStats.TotalEnemiesSpawnedInLevel;
+                        }
+                            
+
+                        break;
+
+                    case 3://Level 3
+                        GameSessionStats.NumberOfKillsRequired = 40;
+
+                        if (GameSessionStats.BossStatus == false)
+                        {
+                            EntityManager.Add(Enemy.CreateGovernmentBoss(GetSpawnPosition()));
+                            GameSessionStats.BossStatus = true;
+                        }
+
+                        if (rand.Next((int)governmentSeekerSpawnChance * 2) == 0)
+                        {
+                            EntityManager.Add(Enemy.CreateGovernmentSeeker(GetSpawnPosition()));
+                        }
+                            
+                        if (rand.Next((int)pirateSeekerSpawnChance * 2) == 0)
+                        {
+                            EntityManager.Add(Enemy.CreatePirateSeeker(GetSpawnPosition()));
+                        }
+                            
+                        
+                        break;
+                }
+
+
             }
 
-            // slowly increase the spawn rate as time progresses
-            if (governmentSeekerSpawnChance > 20)
-                governmentSeekerSpawnChance -= 0.005f;
-            if (pirateSeekerSpawnChance > 20)
-                pirateSeekerSpawnChance -= 0.005f;
+        }
+
+        private static bool ProgressToNextLevel()
+        {
+            //Progress to next level if required kill count has been reached
+            if (GameSessionStats.NumberOfKills == GameSessionStats.NumberOfKillsRequired)
+            {
+                ++GameSessionStats.CurrentLevel;
+                GameSessionStats.TotalEnemiesSpawnedInLevel = 0;
+                return true;
+            }
+            return false;
+            
+        }
+
+        private static bool LevelSpawnCapReached()
+        {
+            //Don't spawn new enemies if there are already enough to kill for next level
+            if (GameSessionStats.TotalEnemiesSpawnedInLevel == GameSessionStats.NumberOfKillsRequired)
+            {
+                return true;
+            }
+            return false;
         }
 
         private static Vector2 GetSpawnPosition()

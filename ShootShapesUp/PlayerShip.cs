@@ -41,9 +41,6 @@ namespace ShootShapesUp
         {
             if (IsDead)
             {
-                if(GameSessionStats.NumberOfLives == 0){
-                    GameRoot.ResetGameSession();
-                }
                 --framesUntilRespawn;
                 return;
             }
@@ -90,7 +87,7 @@ namespace ShootShapesUp
 
         public void Kill()
         {
-            GameSessionStats.NumberOfLives--;
+            --GameSessionStats.NumberOfLives;
             framesUntilRespawn = 60;
         }
     }

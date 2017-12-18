@@ -13,9 +13,12 @@ namespace ShootShapesUp
     {
 
         public static int NumberOfKills = 0;
+        public static int NumberOfKillsRequired;
         public static int NumberOfLives = 3;
         public static Stopwatch StopWatch = new Stopwatch();
 
-
+        public static int CurrentLevel = 1;
+        public static int TotalEnemiesSpawnedInLevel = 0;
+        public static bool BossStatus = false;
     }
 }

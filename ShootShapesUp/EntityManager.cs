@@ -86,7 +86,7 @@ namespace ShootShapesUp
                 if (enemies[i].IsActive && IsColliding(PlayerShip.Instance, enemies[i]))
                 {
                     PlayerShip.Instance.Kill();
-                    enemies.ForEach(x => x.WasShot());
+                    enemies.ForEach(x => x.WasCrashedInto());
                     EnemySpawner.Reset();
                     break;
                 }
