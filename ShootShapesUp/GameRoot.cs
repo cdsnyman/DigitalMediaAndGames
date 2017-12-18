@@ -137,6 +137,7 @@ namespace ShootShapesUp
             GameSessionStats.StopWatch.Restart();
             GameSessionStats.TotalEnemiesSpawnedInLevel = 0;
             GameSessionStats.BossKilled = false;
+            GameSessionStats.BossStatus = false;
             EntityManager.DespawnAllEnemies();
         }
     }

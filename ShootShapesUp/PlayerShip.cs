@@ -24,6 +24,8 @@ namespace ShootShapesUp
 
         const int cooldownFrames = 6;
         int cooldownRemaining = 0;
+        public bool invincibility = false;
+        int invincibilityTimer = 30;
 
         int framesUntilRespawn = 0;
         public bool IsDead { get { return framesUntilRespawn > 0; } }
@@ -43,6 +45,16 @@ namespace ShootShapesUp
             {
                 --framesUntilRespawn;
                 return;
+            }
+
+            if(invincibility == true)
+            {
+                invincibilityTimer--;
+            }
+            
+            if(invincibilityTimer == 0)
+            {
+                invincibility = false;
             }
 
             if (Input.WasShootButtonPressed())
@@ -89,6 +101,8 @@ namespace ShootShapesUp
         {
             --GameSessionStats.NumberOfLives;
             framesUntilRespawn = 60;
+            invincibility = true;
+            invincibilityTimer = 30;
         }
     }
 }

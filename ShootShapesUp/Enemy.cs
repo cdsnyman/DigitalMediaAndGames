@@ -42,7 +42,7 @@ namespace ShootShapesUp
         {
             var enemy = new Enemy(GameRoot.PirateBoss, position);
             enemy.AddBehaviour(enemy.FollowPlayer(1f));
-            enemy.HealthPoints = 100;
+            enemy.HealthPoints = 200;
             enemy.BossFlag = true;
 
             return enemy;
@@ -51,8 +51,8 @@ namespace ShootShapesUp
         public static Enemy CreatePirateSeeker(Vector2 position)
         {
             var enemy = new Enemy(GameRoot.PirateSeeker, position);
-            enemy.AddBehaviour(enemy.FollowPlayer(1.2f));
-            enemy.HealthPoints = 1;
+            enemy.AddBehaviour(enemy.FollowPlayer(1.4f));
+            enemy.HealthPoints = 6;
 
             return enemy;
         }

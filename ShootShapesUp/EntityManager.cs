@@ -83,7 +83,7 @@ namespace ShootShapesUp
             // handle collisions between the player and enemies
             for (int i = 0; i < enemies.Count; i++)
             {
-                if (enemies[i].IsActive && IsColliding(PlayerShip.Instance, enemies[i]))
+                if (enemies[i].IsActive && IsColliding(PlayerShip.Instance, enemies[i]) && PlayerShip.Instance.invincibility == false)
                 {
                     PlayerShip.Instance.Kill();
                     enemies.ForEach(x => x.WasCrashedInto());

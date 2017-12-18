@@ -74,13 +74,9 @@ namespace ShootShapesUp
                             GameRoot.ResetGameSession();
                             GameSessionStats.CurrentLevel = 1;
                         }
-
-                        if (rand.Next((int)governmentSeekerSpawnChance * 2) == 0)
-                        {
-                            EntityManager.Add(Enemy.CreateGovernmentSeeker(GetSpawnPosition()));
-                        }
+                        
                             
-                        if (rand.Next((int)pirateSeekerSpawnChance * 2) == 0)
+                        if (rand.Next((int)pirateSeekerSpawnChance) == 0)
                         {
                             EntityManager.Add(Enemy.CreatePirateSeeker(GetSpawnPosition()));
                         }
